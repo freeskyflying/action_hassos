@@ -1,6 +1,6 @@
 name: HassOS-AutoBuild2
 
-on: push
+on: workflow_dispatch
 
 env:
   RUN_VALIDATION: true

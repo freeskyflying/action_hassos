@@ -7,7 +7,7 @@ on:
   #  branches:
   #    - main
   #  paths:
-  #    - 'start'
+      - 'start'
   workflow_dispatch:
     inputs:
       ssh:

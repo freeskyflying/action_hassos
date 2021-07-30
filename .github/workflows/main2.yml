@@ -1,21 +1,6 @@
 name: HassOS-AutoBuild2
 
-on:
-#  release:
-#    types: [published]
-  push:
-    branches:
-      - main
-    paths:
-      - 'start'
-  workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
-  #watch:
-  #  types: [started]
+on: push
 
 env:
   RUN_VALIDATION: true

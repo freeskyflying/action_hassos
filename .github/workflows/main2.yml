@@ -3,10 +3,10 @@ name: HassOS-AutoBuild2
 on:
 #  release:
 #    types: [published]
-  #push:
-  #  branches:
-  #    - main
-  #  paths:
+  push:
+    branches:
+      - main
+    paths:
       - 'start'
   workflow_dispatch:
     inputs:

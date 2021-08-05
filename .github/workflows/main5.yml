@@ -1,4 +1,4 @@
-name: HassOS-AutoBuild2
+name: HassOS-AutoBuild-rpi64
 
 on:
 #  release:

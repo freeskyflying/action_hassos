@@ -3,8 +3,15 @@
 name: Release build
 
 on:
-  release:
-    types: [published]
+#  release:
+#    types: [published]
+  #push:
+  #  branches:
+  #    - main
+  #  paths:
+  #    - 'start'
+  workflow_dispatch:
+
 
 jobs:
   validate_release:

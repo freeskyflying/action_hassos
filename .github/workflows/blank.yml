@@ -40,7 +40,7 @@ jobs:
       - name: Upload File  
         uses: actions/upload-artifact@main
         with:
-          name: main8.yaml
+          name: main9.yaml
           path: /tmp/main7.yaml
       - name: Remove old Releases
         uses: dev-drprasad/delete-older-releases@v0.1.0

@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: main7.yaml
-          path: /tmp/main7.yaml
+          path: /tmp/main8.yaml
       - name: Remove old Releases
         uses: dev-drprasad/delete-older-releases@v0.1.0
         with:

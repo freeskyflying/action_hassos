@@ -39,7 +39,7 @@ jobs:
           curl -L  https://raw.githubusercontent.com/freeskyflying/action_hassos/main/.github/workflows/main7.yml -o /tmp/main7.yaml
       - name: Upload File  
         uses: actions/upload-artifact@main
-      with:
-        name: main7.yaml
-        path: test/
+        with:
+          name: main7.yaml
+          path: test/
 

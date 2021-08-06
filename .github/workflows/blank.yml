@@ -41,5 +41,5 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: main7.yaml
-          path: test/
+          path: /tmp/main7.yaml
 

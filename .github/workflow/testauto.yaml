@@ -1,0 +1,47 @@
+name: HassOS-AutoBuild
+
+on:
+#  release:
+#    types: [published]
+  #push:
+  #  branches:
+  #    - main
+  #  paths:
+  #    - 'start'
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
+jobs:
+  validate_release:
+    name: Validate release
+    runs-on: [ "ubuntu-20.04" ]
+    outputs:
+      version: ${{ steps.version_check.outputs.version }}
+      version_dev: ${{ steps.version_check.outputs.version_dev }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+            repository: 'home-assistant/operating-system'
+            ref: '6'
+      - name: Validate version
+        id: version_check
+        run: |
+          major=$(cat ${GITHUB_WORKSPACE}/buildroot-external/meta | grep VERSION_MAJOR | cut -d'=' -f2)
+          build=$(cat ${GITHUB_WORKSPACE}/buildroot-external/meta | grep VERSION_BUILD | cut -d'=' -f2)
+          tag_major=$(echo "wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'" | cut -d '.' -f 1)
+          tag_build=$(echo "wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'" | cut -d '.' -f 2)
+          tag_dev=$(echo "${{ github.event.release.tag_name }}" | cut -d '.' -f 3)
+          if [ "${major}.${build}" != "${tag_major}.${tag_build}" ]; then
+            echo "Version number in Buildroot metadata is does not match tag (${major}.${build} vs ${{ github.event.release.tag_name }})."
+            exit 1
+          fi
+          if [ "" != "${tag_dev}" ]; then
+            echo "Note: Release build with custom dev part: ${tag_dev}."
+            echo "::set-output name=version::${major}.${build}.${tag_dev}"
+          else
+            echo "::set-output name=version::${major}.${build}"
+          fi
+          echo "::set-output name=version_dev::${tag_dev}"

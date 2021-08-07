@@ -49,7 +49,7 @@ jobs:
       run: |
         df -hT $PWD
         #dpkg-query -W --showformat='${Installed-Size} ${Package} ${Status}\n'|grep -v deinstall|sort -n|awk '{print $1" "$2}'
-        git clone https://github.com/home-assistant/operating-system.git -b master HassOS
+        git clone https://github.com/home-assistant/operating-system.git -b rel-6 HassOS
     
     - name: Change Settings.
       run: |
@@ -60,11 +60,6 @@ jobs:
         sed -i 's/-e\ BUILDER_UID/-e TZ=Asia\/Shanghai\ -e BUILDER_UID/g' scripts/enter.sh
         #sed -i '/set/a\set\ FORCE_UNSAFE_CONFIGURE=1' scripts/entry.sh
         sed -i 's/-e\ SUPERVISOR_NAME=hassio_supervisor/-e TZ=Asia\/Shanghai\ -e SUPERVISOR_NAME=hassio_supervisor/g' buildroot-external/rootfs-overlay/usr/sbin/hassos-supervisor
-        mv  buildroot-external/rootfs-overlay/usr/sbin/hassos-cli buildroot-external/rootfs-overlay/usr/sbin/hassos-cli2
-        echo "
-        #!/bin/sh
-        exec /bin/ash -l
-        " >> buildroot-external/rootfs-overlay/usr/sbin/hassos-cli
         #sed -i 's/\:\/cache/:\/cache\ -v\ \/etc\/resolv.conf:\/etc\/resolv.conf/g' scripts/enter.sh
         sed -i '/vhdx/d' buildroot-external/scripts/hdd-image.sh
         sed -i '/vdi/d' buildroot-external/scripts/hdd-image.sh

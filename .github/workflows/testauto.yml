@@ -72,6 +72,7 @@ jobs:
       matrix:
         board:
           - {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
+          - {"name": "odroid_n2", "output": "odroid-n2", "runner": "aarch64-runner"}
     runs-on: ${{ matrix.board.runner }}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it

@@ -72,5 +72,5 @@ jobs:
       matrix:
         board:
           if [ "" != "$(echo "${{github.event.inputs.ssh}}" | grep fal)" ]
-            - {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
+          - {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
     runs-on: ${{ matrix.board.runner }}

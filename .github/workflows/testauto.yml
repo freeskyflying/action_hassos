@@ -72,10 +72,10 @@ jobs:
       matrix:
         board:
           - {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
-    if: (github.event.inputs.ssh == 'false')
     runs-on: [ "ubuntu-20.04" ]
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      if: (github.event.inputs.ssh == 'false')
       - uses: actions/checkout@v2
         with:
             repository: 'home-assistant/operating-system'

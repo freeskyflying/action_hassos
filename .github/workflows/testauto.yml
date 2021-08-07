@@ -29,11 +29,11 @@ jobs:
           tag_major=$(echo "${getver}" | cut -d '.' -f 1)
           tag_build=$(echo "${getver}" | cut -d '.' -f 2)
           tag_dev=$(echo "${getver}" | cut -d '.' -f 3)
-          tag_dev="rel-"${tag_major}
+          tag_rel="rel-"${tag_major}
           echo "tag_major=$tag_major" >> $GITHUB_ENV
           echo "tag_build=$tag_build" >> $GITHUB_ENV
           echo "tag_dev=$tag_dev" >> $GITHUB_ENV
-          echo "tag_dev=$tag_dev" >> $GITHUB_ENV
+          echo "tag_rel=$tag_rel" >> $GITHUB_ENV
           echo ${tag_major}
           echo ${tag_build}
           echo ${tag_dev}
@@ -47,9 +47,9 @@ jobs:
         run: |
           major=$(cat ${GITHUB_WORKSPACE}/buildroot-external/meta | grep VERSION_MAJOR | cut -d'=' -f2)
           build=$(cat ${GITHUB_WORKSPACE}/buildroot-external/meta | grep VERSION_BUILD | cut -d'=' -f2)
-          tag_major=${steps.detemine_ref.env.tag_major}
-          tag_build=${steps.detemine_ref.env.tag_build}
-          tag_dev=${steps.detemine_ref.env.tag_dev}
+          tag_major=$(steps.detemine_ref.env.tag_major)
+          tag_build=$(steps.detemine_ref.env.tag_build)
+          tag_dev=$(steps.detemine_ref.env.tag_dev)
           if [ "${major}.${build}" != "${tag_major}.${tag_build}" ]; then
             echo "Version number in Buildroot metadata is does not match tag (${major}.${build} vs ${{ github.event.release.tag_name }})."
             exit 1

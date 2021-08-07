@@ -70,9 +70,9 @@ jobs:
     needs: validate_release
     strategy:
       matrix:
-        board:
-          include:
-            - {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
+        include:
+            board:
+                - {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
     runs-on: ${{ matrix.board.runner }}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it

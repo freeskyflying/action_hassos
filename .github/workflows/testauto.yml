@@ -84,7 +84,7 @@ jobs:
             ref: ${{env.tag_rel}}
       
       - name: test2
-        if: (github.event.inputs.ssh == 'false')
+        if: (github.event.inputs.ssh != 'false')
         uses: actions/checkout@v2
         with:
             repository: 'home-assistant/operating-system'

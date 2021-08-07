@@ -61,3 +61,5 @@ jobs:
             echo "::set-output name=version::${major}.${build}"
           fi
           echo "::set-output name=version_dev::${tag_dev}"
+          echo "version="$version
+          echo "version_dev="$tag_dev

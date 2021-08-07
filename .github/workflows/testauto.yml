@@ -38,7 +38,6 @@ jobs:
           echo ${tag_build}
           echo ${tag_dev}
           echo ${tag_rel}
-          iftest=$(echo "${{github.event.inputs.ssh}}" | grep fal)
           if [ "" != "$(echo "${{github.event.inputs.ssh}}" | grep fal)" ]; then
             echo "fal"
           fi
@@ -66,3 +65,12 @@ jobs:
           fi
           echo "::set-output name=version_dev::${tag_dev}"
           echo "version="${major}"+"${build}"+"${tag_dev}
+  build:
+    name: Release build for ${{ matrix.board.name }}
+    needs: validate_release
+    strategy:
+      matrix:
+        board:
+          if [ "" != "$(echo "${{github.event.inputs.ssh}}" | grep fal)" ]
+            - {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
+    runs-on: ${{ matrix.board.runner }}

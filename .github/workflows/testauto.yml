@@ -72,7 +72,7 @@ jobs:
       matrix:
         board:
           - {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
-    runs-on: ${{ matrix.board.runner }}
+    runs-on: [ "ubuntu-20.04" ]
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2

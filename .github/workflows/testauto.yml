@@ -31,9 +31,12 @@ jobs:
         run: |
           major=$(cat ${GITHUB_WORKSPACE}/buildroot-external/meta | grep VERSION_MAJOR | cut -d'=' -f2)
           build=$(cat ${GITHUB_WORKSPACE}/buildroot-external/meta | grep VERSION_BUILD | cut -d'=' -f2)
-          tag_major=$(echo "wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'" | cut -d '.' -f 1)
-          tag_build=$(echo "wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'" | cut -d '.' -f 2)
+          tag_major=$(wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g' | cut -d '.' -f 1)
+          echo ${tag_major}
+          tag_build=$(wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g' | cut -d '.' -f 2)
+          echo ${tag_build}
           tag_dev=$(echo "${{ github.event.release.tag_name }}" | cut -d '.' -f 3)
+          echo ${tag_dev}
           if [ "${major}.${build}" != "${tag_major}.${tag_build}" ]; then
             echo "Version number in Buildroot metadata is does not match tag (${major}.${build} vs ${{ github.event.release.tag_name }})."
             exit 1

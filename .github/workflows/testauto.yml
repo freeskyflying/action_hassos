@@ -40,6 +40,8 @@ jobs:
           echo ${tag_rel}
           if [$(echo "${github.event.inputs.ssh}" | grep fal)]
             echo "fal"
+            exit 1
+          fi
       - uses: actions/checkout@v2
         with:
             repository: 'home-assistant/operating-system'

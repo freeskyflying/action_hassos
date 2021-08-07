@@ -71,7 +71,6 @@ jobs:
     strategy:
       matrix:
         board:
-          if [ "" != "$(echo "${{github.event.inputs.ssh}}" | grep fal)" ]
           include:
             - {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
     runs-on: ${{ matrix.board.runner }}

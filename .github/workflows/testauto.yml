@@ -39,7 +39,7 @@ jobs:
           echo ${tag_dev}
           echo ${tag_rel}
           iftest=$(echo "${{github.event.inputs.ssh}}" | grep fal)
-          if ["" != ${iftest}]; then
+          if [ "" != "${iftest}" ]; then
             echo "fal"
           fi
       - uses: actions/checkout@v2

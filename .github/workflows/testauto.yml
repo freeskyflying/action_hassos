@@ -28,9 +28,11 @@ jobs:
           tag_major=$(echo "${getver}" | cut -d '.' -f 1)
           tag_build=$(echo "${getver}" | cut -d '.' -f 2)
           tag_dev=$(echo "${getver}" | cut -d '.' -f 3)
+          tag_rel="rel-"${tag_major}
           echo ${tag_major}
           echo ${tag_build}
           echo ${tag_dev}
+          echo ${tag_rel}
       - uses: actions/checkout@v2
         with:
             repository: 'home-assistant/operating-system'

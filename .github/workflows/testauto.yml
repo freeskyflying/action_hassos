@@ -72,6 +72,10 @@ jobs:
       matrix:
         board:
           - {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
+    if [ "" != "$(echo "${{github.event.inputs.ssh}}" | grep fal)" ]
+    matrix:
+        include:
+        -board:{"name": "ova2", "output": "ova", "runner": "x86-64-runner"}
     runs-on: [ "ubuntu-20.04" ]
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it

@@ -38,7 +38,8 @@ jobs:
           echo ${tag_build}
           echo ${tag_dev}
           echo ${tag_rel}
-          if ["" != $(echo "${{github.event.inputs.ssh}}" | grep fal)]; then
+          iftest= $(echo "${{github.event.inputs.ssh}}" | grep fal)
+          if ["" != $({iftest}]; then
             echo "fal"
             exit 1
           fi

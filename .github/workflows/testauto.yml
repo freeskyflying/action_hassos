@@ -29,10 +29,10 @@ jobs:
           tag_build=$(echo "${getver}" | cut -d '.' -f 2)
           tag_dev=$(echo "${getver}" | cut -d '.' -f 3)
           tag_dev="rel-"${tag_major}
-          echo "::set-env name=tag_major::$tag_major"
-          echo "::set-env name=tag_build::$tag_build"
-          echo "::set-env name=tag_dev::$tag_dev"
-          echo "::set-env name=tag_dev::$tag_dev"
+          echo "tag_major=$tag_major" >> $GITHUB_ENV
+          echo "tag_build=$tag_build" >> $GITHUB_ENV
+          echo "tag_dev=$tag_dev" >> $GITHUB_ENV
+          echo "tag_dev=$tag_dev" >> $GITHUB_ENV
           echo ${tag_major}
           echo ${tag_build}
           echo ${tag_dev}

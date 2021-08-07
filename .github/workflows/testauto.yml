@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: detemine ref
         run: |
-          relver=$(echo "rel-" wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g' | cut -d '.' -f 1)
+          relver="rel-" $(wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g' | cut -d '.' -f 1)
           echo ${relver}
       - uses: actions/checkout@v2
         with:

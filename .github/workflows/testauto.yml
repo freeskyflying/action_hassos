@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: detemine ref
         run: |
-          getver=${wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g' }
+          getver=wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g' 
           tag_major=${echo "${getver}" | cut -d '.' -f 1}
           tag_build=${echo "${getver}" | cut -d '.' -f 2}
           tag_dev=${echo "${getver}" | cut -d '.' -f 3}

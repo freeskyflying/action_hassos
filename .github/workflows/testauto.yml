@@ -77,14 +77,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: test1
-        #if: (github.event.inputs.ssh == 'false')
+        if: (github.event.inputs.ssh == 'false')
         uses: actions/checkout@v2
         with:
             repository: 'home-assistant/operating-system'
             ref: ${{env.tag_rel}}
       
       - name: test2
-        #if: (github.event.inputs.ssh == 'false')
+        if: (github.event.inputs.ssh == 'false')
         uses: actions/checkout@v2
         with:
             repository: 'home-assistant/operating-system'

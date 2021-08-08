@@ -65,13 +65,14 @@ jobs:
           fi
           echo "::set-output name=version_dev::${tag_dev}"
           echo "version="${major}"+"${build}"+"${tag_dev}
+          echo ${nproc}
   build:
     name: Release build for ${{ matrix.board.name }}
     needs: validate_release
     strategy:
       matrix:
         board:
-          - {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
+          #- {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
           - {"name": "odroid_n2", "output": "odroid-n2", "runner": "aarch64-runner"}
     runs-on: [ "ubuntu-20.04" ]
     steps:
@@ -82,6 +83,3 @@ jobs:
         with:
             repository: 'home-assistant/operating-system'
             ref: ${{env.tag_rel}}
-        run: |
-          echo $(nproc)
-      

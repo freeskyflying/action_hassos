@@ -157,7 +157,7 @@ jobs:
       run: |
         sleep $((RANDOM % 60))    
         cd ${GITHUB_WORKSPACE}
-        ./scripts/enter.sh make -j$5 ${{matrix.target}}
+        ./scripts/enter.sh make -j5 ${{matrix.target}}
         #sudo ./scripts/entry.sh make ${{matrix.target}}
         cd ${GITHUB_WORKSPACE}/release
         ls -l

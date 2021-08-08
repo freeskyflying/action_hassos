@@ -151,8 +151,8 @@ jobs:
       env:
           RAUC_CERTIFICATE: ${{ secrets.RAUC_CERTIFICATE }}
           RAUC_PRIVATE_KEY: ${{ secrets.RAUC_PRIVATE_KEY }}
-          RAUC_CERTIFICATE_CA: ${{ RAUC_CERTIFICATE_CA }}
-          RAUC_CERTIFICATE_CA: ${{ RAUC_CERTIFICATE_CB }}
+          RAUC_CERTIFICATE_CA: ${{ secrets.RAUC_CERTIFICATE_CA }}
+          RAUC_CERTIFICATE_CA: ${{ secrets.RAUC_CERTIFICATE_CB }}
       run: |
           echo -e "-----BEGIN CERTIFICATE-----\n${RAUC_CERTIFICATE}\n-----END CERTIFICATE-----" > cert.pem
           echo -e "-----BEGIN PRIVATE KEY-----\n${RAUC_PRIVATE_KEY}\n-----END PRIVATE KEY-----" > key.pem

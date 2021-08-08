@@ -1,4 +1,4 @@
-name: HassOS-AutoBuild2-n2-selfhost
+name: HassOS-AutoBuild2-n2
 
 on:
 #  release:
@@ -20,7 +20,7 @@ env:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     #runs-on: ubuntu-16.04
     name: Build ${{matrix.target}}
     strategy:
@@ -151,8 +151,8 @@ jobs:
       env:
           RAUC_CERTIFICATE: ${{ secrets.RAUC_CERTIFICATE }}
           RAUC_PRIVATE_KEY: ${{ secrets.RAUC_PRIVATE_KEY }}
-          RAUC_CERTIFICATE_CA: ${{ RAUC_CERTIFICATE_CA }}
-          RAUC_CERTIFICATE_CA: ${{ RAUC_CERTIFICATE_CB }}
+          RAUC_CERTIFICATE_CA: ${{ secrets.RAUC_CERTIFICATE_CA }}
+          RAUC_CERTIFICATE_CA: ${{ secrets.RAUC_CERTIFICATE_CB }}
       run: |
           echo -e "-----BEGIN CERTIFICATE-----\n${RAUC_CERTIFICATE}\n-----END CERTIFICATE-----" > cert.pem
           echo -e "-----BEGIN PRIVATE KEY-----\n${RAUC_PRIVATE_KEY}\n-----END PRIVATE KEY-----" > key.pem
@@ -167,7 +167,7 @@ jobs:
       run: |
         sleep $((RANDOM % 60))    
         cd ${GITHUB_WORKSPACE}
-        ./scripts/enter.sh make -j$(($(nproc) + 1)) ${{matrix.target}}
+        ./scripts/enter.sh make -j$5 ${{matrix.target}}
         #sudo ./scripts/entry.sh make ${{matrix.target}}
         cd ${GITHUB_WORKSPACE}/release
         ls -l

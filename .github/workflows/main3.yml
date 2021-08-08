@@ -1,4 +1,4 @@
-name: HassOS-AutoBuild2-n2
+name: HassOS-AutoBuild2-n2-selfhost
 
 on:
 #  release:

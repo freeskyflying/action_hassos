@@ -25,6 +25,7 @@ jobs:
       - name: detemine ref
         id: detemine_ref
         run: |
+          mkdir hassos && cd hassos
           getver=$(wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g' )
           tag_major=$(echo "${getver}" | cut -d '.' -f 1)
           tag_build=$(echo "${getver}" | cut -d '.' -f 2)
@@ -67,6 +68,8 @@ jobs:
           fi
           echo "::set-output name=version_dev::${tag_dev}"
           echo "version="${major}"+"${build}"+"${tag_dev}
+          cd ..
+          ls -l
 
   build:
     name: Release build for ${{ matrix.board.name }}

@@ -41,6 +41,8 @@ jobs:
           if [ "" != "$(echo "${{github.event.inputs.ssh}}" | grep fal)" ]; then
             echo "fal"
           fi
+          echo ${nproc}
+          echo $(nproc)
       - uses: actions/checkout@v2
         with:
             repository: 'home-assistant/operating-system'
@@ -65,7 +67,7 @@ jobs:
           fi
           echo "::set-output name=version_dev::${tag_dev}"
           echo "version="${major}"+"${build}"+"${tag_dev}
-          echo ${nproc}
+
   build:
     name: Release build for ${{ matrix.board.name }}
     needs: validate_release

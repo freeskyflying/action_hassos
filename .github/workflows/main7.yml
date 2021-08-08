@@ -155,9 +155,8 @@ jobs:
           echo -e "-----BEGIN CERTIFICATE-----\n${RAUC_CERTIFICATE}\n-----END CERTIFICATE-----" > cert.pem
           echo -e "-----BEGIN PRIVATE KEY-----\n${RAUC_PRIVATE_KEY}\n-----END PRIVATE KEY-----" > key.pem
           echo -e "-----BEGIN CERTIFICATE-----\n${RAUC_CA}\n-----END CERTIFICATE-----\n" > ca.pem
-          echo -e "-----BEGIN CERTIFICATE-----\n${RAUC_CA}\n-----END CERTIFICATE-----\n" > ca1.pem
           echo -e "-----BEGIN CERTIFICATE-----\n${RAUC_CA1}\n-----END CERTIFICATE-----" >> ca.pem
-          echo -e "-----BEGIN CERTIFICATE-----\n${RAUC_CA1}\n-----END CERTIFICATE-----" > ca2.pem
+          echo $${RAUC_CA}
           ls -l
           echo ${GITHUB_WORKSPACE}
           cd ${GITHUB_WORKSPACE}

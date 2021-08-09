@@ -32,6 +32,7 @@ jobs:
           echo -e '\n127.0.0.1 invisible-mirror.net\n' | sudo tee -a /etc/hosts
           cat /etc/hosts
           ping -c 4 invisible-mirror.net
+          wget https://invisible-mirror.net/archives/ncurses/6.1/ncurses-6.1-20191116.patch.gz
           sudo apt-get install  -y --no-install-recommends ncurses-dev
           tag_build=$(echo "${getver}" | cut -d '.' -f 2)
           tag_dev=$(echo "${getver}" | cut -d '.' -f 3)

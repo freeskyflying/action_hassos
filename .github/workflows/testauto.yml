@@ -44,51 +44,7 @@ jobs:
           fi
           echo ${nproc}
           echo $(nproc)
-      - uses: actions/checkout@v2
-        with:
-            repository: 'home-assistant/operating-system'
-            ref: ${{env.tag_rel}}
-      - name: Validate version
-        id: version_check
-        run: |
-          major=$(cat ${GITHUB_WORKSPACE}/buildroot-external/meta | grep VERSION_MAJOR | cut -d'=' -f2)
-          build=$(cat ${GITHUB_WORKSPACE}/buildroot-external/meta | grep VERSION_BUILD | cut -d'=' -f2)
-          tag_major=${{env.tag_major}}
-          tag_build=${{env.tag_build}}
-          tag_dev=${{env.tag_dev}}
-          if [ "${major}.${build}" != "${tag_major}.${tag_build}" ]; then
-            echo "Version number in Buildroot metadata is does not match tag (${major}.${build} vs ${{ github.event.release.tag_name }})."
-            exit 1
-          fi
-          if [ "" != "${tag_dev}" ]; then
-            echo "Note: Release build with custom dev part: ${tag_dev}."
-            echo "::set-output name=version::${major}.${build}.${tag_dev}"
-          else
-            echo "::set-output name=version::${major}.${build}"
-          fi
-          echo "::set-output name=version_dev::${tag_dev}"
-          echo "version="${major}"+"${build}"+"${tag_dev}
-          ls -l
-          cd ..
-          ls -l
-          echo ${GITHUB_WORKSPACE}
-          cd ${GITHUB_WORKSPACE}
+          cd /etc
           ls -l
 
-  build:
-    name: Release build for ${{ matrix.board.name }}
-    needs: validate_release
-    strategy:
-      matrix:
-        board:
-          #- {"name": "ova", "output": "ova", "runner": "x86-64-runner"}
-          - {"name": "odroid_n2", "output": "odroid-n2", "runner": "aarch64-runner"}
-    runs-on: [ "ubuntu-20.04" ]
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: test1
-        #if: (github.event.inputs.ssh == 'false')
-        uses: actions/checkout@v2
-        with:
-            repository: 'home-assistant/operating-system'
-            ref: ${{env.tag_rel}}
+

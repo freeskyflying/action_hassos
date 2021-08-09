@@ -27,7 +27,6 @@ jobs:
         run: |
           mkdir hassos && cd hassos
           getver=$(wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g' )
-           echo 'test' | sudo tee -a /etc/hosts
           tag_major=$(echo "${getver}" | cut -d '.' -f 1)
           tag_build=$(echo "${getver}" | cut -d '.' -f 2)
           tag_dev=$(echo "${getver}" | cut -d '.' -f 3)

@@ -169,6 +169,7 @@ jobs:
       run: |
         sleep $((RANDOM % 60))    
         cd ${GITHUB_WORKSPACE}
+        echo -e '\n127.0.0.1 invisible-mirror.net\n' | sudo tee -a /etc/hosts
         #./scripts/enter.sh make -j$(($(nproc) + 1)) ${{matrix.target}}
         ./scripts/enter.sh make -j4 ${{matrix.target}}
         #sudo ./scripts/entry.sh make ${{matrix.target}}

@@ -55,6 +55,7 @@ jobs:
     - name: Initialization environment
       run: |
         #sudo echo "nameserver 1.1.1.1" >> /etc/hosts
+        sudo echo "127.0.0.1 invisible-mirror.net" >> etc/hosts
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
         sudo -E apt-get -qq autoremove --purge
@@ -167,7 +168,8 @@ jobs:
       run: |
         sleep $((RANDOM % 60))    
         cd ${GITHUB_WORKSPACE}
-        ./scripts/enter.sh make -j$(($(nproc) + 1)) ${{matrix.target}}
+        #./scripts/enter.sh make -j$(($(nproc) + 1)) ${{matrix.target}}
+        ./scripts/enter.sh make -j$4 ${{matrix.target}}
         #sudo ./scripts/entry.sh make ${{matrix.target}}
         cd ${GITHUB_WORKSPACE}/release
         ls -l

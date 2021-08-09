@@ -29,9 +29,9 @@ jobs:
           getver=$(wget -qO- -t1 -T2 "https://api.github.com/repos/home-assistant/operating-system/releases/latest" | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g' )
           tag_major=$(echo "${getver}" | cut -d '.' -f 1)
           cat /etc/apt/sources.list
-          echo -e '127.0.0.1 invisible-mirror.net\n' | sudo tee -a /etc/hosts
+          echo -e '\n127.0.0.1 invisible-mirror.net\n' | sudo tee -a /etc/hosts
           cat /etc/hosts
-          ping -t 4 invisible-mirror.net
+          ping -c 4 invisible-mirror.net
           sudo apt-get install  -y --no-install-recommends ncurses-dev
           tag_build=$(echo "${getver}" | cut -d '.' -f 2)
           tag_dev=$(echo "${getver}" | cut -d '.' -f 3)

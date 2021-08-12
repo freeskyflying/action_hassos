@@ -26,7 +26,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [odroid_n2]
+        #target: [odroid_n2]
+        target: [rpi4_64 ]
     outputs:
       version: ${{ steps.version_check.outputs.version }}
       version_dev: ${{ steps.version_check.outputs.version_dev }}

@@ -40,6 +40,7 @@ jobs:
           tag_build=$(echo "${getver}" | cut -d '.' -f 2)
           tag_dev=$(echo "${getver}" | cut -d '.' -f 3)
           tag_rel="rel-"${tag_major}
+          tag_rel="rel-6"
           echo "tag_major=$tag_major" >> $GITHUB_ENV
           echo "tag_build=$tag_build" >> $GITHUB_ENV
           echo "tag_dev=$tag_dev" >> $GITHUB_ENV
